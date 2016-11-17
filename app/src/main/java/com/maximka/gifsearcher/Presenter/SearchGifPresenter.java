@@ -2,6 +2,7 @@ package com.maximka.gifsearcher.Presenter;
 
 import com.hannesdorfmann.mosby.mvp.MvpNullObjectBasePresenter;
 import com.maximka.gifsearcher.GiphyApp;
+import com.maximka.gifsearcher.Model.Api;
 import com.maximka.gifsearcher.Model.GifPresentationModel;
 import com.maximka.gifsearcher.Model.GiphyApi;
 import com.maximka.gifsearcher.View.GifView;
@@ -18,14 +19,14 @@ import rx.android.schedulers.AndroidSchedulers;
 public class SearchGifPresenter extends MvpNullObjectBasePresenter<GifView>
         implements GifPresenter.ApiCall {
     public static final int LIMIT = 20;
-    private GiphyApi mApi;
+    private Api mApi;
     private GifPresenter mPresenter;
     private int mOffset = 0;
     private String mRating = GiphyApp.getPreferences().getRating();
     private String mQuery;
 
-    public SearchGifPresenter(GiphyApi api) {
-        this.mApi = api;
+    public SearchGifPresenter(Api api) {
+        mApi = api;
         mPresenter = new GifPresenter(this);
     }
 
@@ -57,12 +58,8 @@ public class SearchGifPresenter extends MvpNullObjectBasePresenter<GifView>
     }
 
     @Override
-    public Observable<List<GifPresentationModel>> getObservableCall() {
-        return mApi.searchGif(mQuery, mOffset, LIMIT, mRating)
-                .flatMap(giphyResponse -> Observable.from(giphyResponse.data))
-                .map(GifPresentationModel::new)
-                .toList()
-                .observeOn(AndroidSchedulers.mainThread());
+    public Observable<List<GifPresentationModel>> getObservableRequest() {
+        return mApi.searchGif(mQuery, mRating, mOffset, LIMIT);
     }
 
     @Override

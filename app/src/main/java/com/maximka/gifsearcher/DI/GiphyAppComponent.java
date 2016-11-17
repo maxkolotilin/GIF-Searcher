@@ -17,8 +17,7 @@ import dagger.Component;
 @Component(modules = {AppModule.class, NetworkModule.class})
 @Singleton
 public interface GiphyAppComponent {
-    void inject(TrendingGifActivity activity);
     Date getZeroDate();
-    TrendingGifPresenter getPresenter();
-    SearchGifPresenter getSearchPresenter();
+    TrendingGifPresenter getTrendingGifPresenter();
+    SearchGifPresenter getSearchGifPresenter();
 }

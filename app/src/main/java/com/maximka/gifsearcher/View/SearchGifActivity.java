@@ -7,11 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.maximka.gifsearcher.GiphyApp;
-import com.maximka.gifsearcher.Model.GifPresentationModel;
 import com.maximka.gifsearcher.Presenter.SearchGifPresenter;
 import com.maximka.gifsearcher.R;
-
-import java.util.List;
 
 public class SearchGifActivity extends BaseActivity<SearchGifPresenter> implements GifView {
 
@@ -44,7 +41,7 @@ public class SearchGifActivity extends BaseActivity<SearchGifPresenter> implemen
     @NonNull
     @Override
     public SearchGifPresenter createPresenter() {
-        return GiphyApp.getInjector().getSearchPresenter();
+        return GiphyApp.getInjector().getSearchGifPresenter();
     }
 
     @Override

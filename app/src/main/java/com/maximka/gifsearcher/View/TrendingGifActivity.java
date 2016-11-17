@@ -1,27 +1,15 @@
 package com.maximka.gifsearcher.View;
 
 import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
-import com.hannesdorfmann.mosby.mvp.lce.MvpLceActivity;
-import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import com.maximka.gifsearcher.GiphyApp;
-import com.maximka.gifsearcher.Model.GifPresentationModel;
 import com.maximka.gifsearcher.Presenter.TrendingGifPresenter;
 import com.maximka.gifsearcher.R;
-
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class TrendingGifActivity extends BaseActivity<TrendingGifPresenter> implements GifView {
     @Override
@@ -59,7 +47,7 @@ public class TrendingGifActivity extends BaseActivity<TrendingGifPresenter> impl
     @NonNull
     @Override
     public TrendingGifPresenter createPresenter() {
-        return GiphyApp.getInjector().getPresenter();
+        return GiphyApp.getInjector().getTrendingGifPresenter();
     }
 
     @Override

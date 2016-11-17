@@ -27,7 +27,7 @@ public class GifPresenter {
                 return;
             }
             mIsBusy = true;
-            mApiCall.getObservableCall()
+            mApiCall.getObservableRequest()
                     .subscribe(response -> onNext(view, response),
                             throwable -> onError(view, throwable, loadMore)
             );
@@ -63,7 +63,7 @@ public class GifPresenter {
     }
 
     public interface ApiCall {
-        Observable<List<GifPresentationModel>> getObservableCall();
+        Observable<List<GifPresentationModel>> getObservableRequest();
         void incrementOffset(int increment);
     }
 }

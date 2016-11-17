@@ -1,10 +1,8 @@
 package com.maximka.gifsearcher.DI;
 
-import android.content.Context;
-
-import com.maximka.gifsearcher.Model.GiphyApi;
-import com.maximka.gifsearcher.Presenter.TrendingGifPresenter;
+import com.maximka.gifsearcher.Model.Api;
 import com.maximka.gifsearcher.Presenter.SearchGifPresenter;
+import com.maximka.gifsearcher.Presenter.TrendingGifPresenter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,13 +22,13 @@ public class AppModule {
 
     @Provides
     @Singleton
-    TrendingGifPresenter providePresenter(GiphyApi api) {
+    TrendingGifPresenter providePresenter(Api api) {
         return new TrendingGifPresenter(api);
     }
 
     @Provides
     @Singleton
-    SearchGifPresenter provideSearchPresenter(GiphyApi api) {
+    SearchGifPresenter provideSearchPresenter(Api api) {
         return new SearchGifPresenter(api);
     }
 

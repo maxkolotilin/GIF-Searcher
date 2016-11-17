@@ -2,6 +2,7 @@ package com.maximka.gifsearcher.DI;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.maximka.gifsearcher.Model.Api;
 import com.maximka.gifsearcher.Model.GiphyApi;
 
 import javax.inject.Singleton;
@@ -19,10 +20,14 @@ import rx.schedulers.Schedulers;
 
 @Module
 public class NetworkModule {
-
     @Provides
     @Singleton
-    public GiphyApi provideGiphyApi(Gson parser) {
+    Api provideApi(GiphyApi api) {
+        return new Api(api);
+    }
+
+    @Provides
+    GiphyApi provideGiphyApi(Gson parser) {
         return new Retrofit.Builder()
                 .baseUrl(GiphyApi.API_ROOT)
                 .addConverterFactory(GsonConverterFactory.create(parser))
@@ -32,7 +37,7 @@ public class NetworkModule {
     }
 
     @Provides
-    public Gson provideJsonParser() {
+    Gson provideJsonParser() {
         return new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")
                 .create();

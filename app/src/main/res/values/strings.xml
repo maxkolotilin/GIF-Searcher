@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">GIF Searcher</string>
+    <string name="error_message">An error has occurred!</string>
+    <string name="search_title">Search</string>
+    <string name="search_hint">Type your query</string>
+    <string name="rating_y">y</string>
+    <string name="rating_g">g</string>
+    <string name="rating_pg">pg</string>
+    <string name="rating_pg_13">pg-13</string>
+    <string name="rating_r">r</string>
+    <string name="was_trended">Was trended</string>
+    <string name="trending_gif_title">Trending GIF</string>
+</resources>

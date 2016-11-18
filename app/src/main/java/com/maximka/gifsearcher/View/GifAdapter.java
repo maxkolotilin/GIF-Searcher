@@ -9,12 +9,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.bumptech.glide.BitmapRequestBuilder;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.maximka.gifsearcher.GiphyApp;
-import com.maximka.gifsearcher.ImageLoader;
+import com.maximka.gifsearcher.GifLoader;
 import com.maximka.gifsearcher.Model.GifPresentationModel;
 import com.maximka.gifsearcher.R;
 
@@ -30,12 +26,10 @@ import butterknife.ButterKnife;
 
 public class GifAdapter extends RecyclerView.Adapter<GifAdapter.ViewHolder> {
     private List<GifPresentationModel> items = new ArrayList<>();
-    private ImageLoader loader;
     private Activity context;
 
     public GifAdapter(Activity context) {
         this.context = context;
-        loader = GiphyApp.getInjector().getImageLoader();
     }
 
     public void addItems(List<GifPresentationModel> newItems) {
@@ -62,9 +56,9 @@ public class GifAdapter extends RecyclerView.Adapter<GifAdapter.ViewHolder> {
 
         holder.slug.setText(gifInfo.getSlug());
         holder.wasTrended.setVisibility(gifInfo.isWasTrended() ? View.VISIBLE : View.GONE);
+        holder.progressBar.setVisibility(View.GONE);
         holder.setGifViewFixedHeight(gifInfo);
-        holder.gif = null;
-        loader.loadThumbnail(context, gifInfo, holder);
+        holder.setThumbnail();
     }
 
     @Override
@@ -72,8 +66,7 @@ public class GifAdapter extends RecyclerView.Adapter<GifAdapter.ViewHolder> {
         return items.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
-            RequestListener<String, GlideDrawable> {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         static final int DEFAULT_MAX_HEIGHT = 3000;
         static final int DEFAULT_MIN_HEIGHT = 500;
 
@@ -81,26 +74,13 @@ public class GifAdapter extends RecyclerView.Adapter<GifAdapter.ViewHolder> {
         @BindView(R.id.wasTrended) TextView wasTrended;
         @BindView(R.id.gif) ImageView gifView;
         @BindView(R.id.loadGifProgress) ProgressBar progressBar;
-        private BitmapRequestBuilder<String, GlideDrawable> thumbRequest;
-        private GlideDrawable gif;
+        private GifLoader loader;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            loader = GiphyApp.getInjector().getGifLoader();
             itemView.setOnClickListener(this);
-            progressBar.setVisibility(View.GONE);
-        }
-
-        public BitmapRequestBuilder<String, GlideDrawable> getThumbRequest() {
-            return thumbRequest;
-        }
-
-        public ImageView getGifView() {
-            return gifView;
-        }
-
-        public void setThumbRequest(BitmapRequestBuilder<String, GlideDrawable> thumbRequest) {
-            this.thumbRequest = thumbRequest;
         }
 
         public void setGifViewFixedHeight(GifPresentationModel gifInfo) {
@@ -109,37 +89,17 @@ public class GifAdapter extends RecyclerView.Adapter<GifAdapter.ViewHolder> {
             gifView.setMaxHeight(newHeight == 0 ? DEFAULT_MAX_HEIGHT : newHeight);
         }
 
+        public void setThumbnail() {
+            loader.loadThumbnail(context, items.get(getAdapterPosition()), gifView);
+        }
+
         @Override
         public void onClick(View v) {
-            if (gif == null) {
-                progressBar.setVisibility(View.VISIBLE);
-                loader.loadGif(context, items.get(getAdapterPosition()), this);
+            if (loader.isGifLoaded()) {
+                loader.switchGifState();
             } else {
-                clickOnLoadedGif();
+                loader.loadGif(context, items.get(getAdapterPosition()), gifView, progressBar);
             }
-        }
-
-        private void clickOnLoadedGif() {
-            if (gif.isRunning()) {
-                gif.stop();
-            } else {
-                gif.start();
-            }
-        }
-
-        @Override
-        public boolean onException(Exception e, String model, Target<GlideDrawable> target,
-                                   boolean isFirstResource) {
-            progressBar.setVisibility(View.GONE);
-            return false;
-        }
-
-        @Override
-        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target,
-                                       boolean isFromMemoryCache, boolean isFirstResource) {
-            progressBar.setVisibility(View.GONE);
-            gif = resource;
-            return false;
         }
     }
 }

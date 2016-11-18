@@ -2,7 +2,7 @@ package com.maximka.gifsearcher.DI;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.maximka.gifsearcher.ImageLoader;
+import com.maximka.gifsearcher.GifLoader;
 import com.maximka.gifsearcher.Model.Api;
 import com.maximka.gifsearcher.Model.GiphyApi;
 
@@ -47,7 +47,7 @@ public class NetworkModule {
     }
 
     @Provides
-    ImageLoader provideImageLoader() {
-        return new ImageLoader();
+    GifLoader provideImageLoader() {
+        return new GifLoader();
     }
 }

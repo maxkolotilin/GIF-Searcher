@@ -19,6 +19,7 @@ import dagger.Provides;
 
 @Module
 public class AppModule {
+    public static final String ZERO_TIME = "1970-01-01 00:00:00";
 
     @Provides
     @Singleton
@@ -36,7 +37,7 @@ public class AppModule {
     @Singleton
     Date provideZeroDate() {
         try {
-            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("1970-01-01 00:00:00");
+            return new SimpleDateFormat(NetworkModule.DATE_PATTERN).parse(ZERO_TIME);
         } catch (ParseException e) {
             e.printStackTrace();
         }

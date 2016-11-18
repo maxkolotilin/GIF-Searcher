@@ -9,6 +9,7 @@ import java.util.Date;
  */
 
 public class GifPresentationModel {
+    public static final String DEFAULT_SLUG = "No slug";
     private String mSlug;
     private String mUrl;
     private String mUrlStill;
@@ -56,7 +57,7 @@ public class GifPresentationModel {
     private String extractSlug(String rawSlug, String id) {
         String result = rawSlug.replace(id, "").replace("-", " ").trim();
         if (result.isEmpty()) {
-            return "No slug";
+            return DEFAULT_SLUG;
         }
 
         return capitalize(result);
@@ -67,10 +68,6 @@ public class GifPresentationModel {
     }
 
     private boolean setWasTrended(Date trendingDate) {
-        if (trendingDate.equals(GiphyApp.getInjector().getZeroDate())) {
-            return false;
-        }
-
-        return true;
+        return !trendingDate.equals(GiphyApp.getInjector().getZeroDate());
     }
 }

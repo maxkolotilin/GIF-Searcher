@@ -3,4 +3,17 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="horizontal_card_margin">8dp</dimen>
+    <dimen name="more_progress_vertical_padding">8dp</dimen>
+    <dimen name="loading_view_size">80dp</dimen>
+    <dimen name="card_radius">2dp</dimen>
+    <dimen name="card_margin_bottom">2dp</dimen>
+    <dimen name="card_margin_top">6dp</dimen>
+    <dimen name="gif_load_progress_margin_bottom">-5dp</dimen>
+    <dimen name="was_trended_margin_end">8dp</dimen>
+    <dimen name="was_trended_margin_top">4dp</dimen>
+    <dimen name="was_trended_text_size">12sp</dimen>
+    <dimen name="slug_horizontal_margin">8dp</dimen>
+    <dimen name="slug_margin_bottom">4dp</dimen>
+    <dimen name="slug_font_size">18sp</dimen>
+    <dimen name="error_view_text_size">20sp</dimen>
 </resources>

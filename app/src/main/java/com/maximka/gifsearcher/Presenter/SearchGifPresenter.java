@@ -4,20 +4,18 @@ import com.hannesdorfmann.mosby.mvp.MvpNullObjectBasePresenter;
 import com.maximka.gifsearcher.GiphyApp;
 import com.maximka.gifsearcher.Model.Api;
 import com.maximka.gifsearcher.Model.GifPresentationModel;
-import com.maximka.gifsearcher.Model.GiphyApi;
 import com.maximka.gifsearcher.View.GifView;
 
 import java.util.List;
 
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * Created by maximka on 17.11.16.
  */
 
 public class SearchGifPresenter extends MvpNullObjectBasePresenter<GifView>
-        implements GifPresenter.ApiCall {
+        implements GifPresenter.ApiCallback {
     public static final int LIMIT = 20;
     private Api mApi;
     private GifPresenter mPresenter;

@@ -3,7 +3,7 @@
 <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingTop="16dp"
-    android:paddingBottom="16dp"
     android:layout_gravity="center_horizontal"
-    android:indeterminate="false" />
+    android:indeterminate="false"
+    android:paddingBottom="@dimen/more_progress_vertical_padding"
+    android:paddingTop="@dimen/more_progress_vertical_padding" />

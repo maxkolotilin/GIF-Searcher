@@ -12,6 +12,7 @@ import proxypref.ProxyPreferences;
  */
 
 public class GiphyApp extends Application {
+    public static final String PREFERENCES_NAME = "preferences";
     private static GiphyAppComponent component;
     private static Preferences preferences;
 
@@ -28,6 +29,6 @@ public class GiphyApp extends Application {
         super.onCreate();
         component = DaggerGiphyAppComponent.create();
         preferences = ProxyPreferences.build(Preferences.class,
-                getSharedPreferences("preferences", 0));
+                getSharedPreferences(PREFERENCES_NAME, 0));
     }
 }

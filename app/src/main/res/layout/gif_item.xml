@@ -10,11 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
+        android:layout_marginBottom="@dimen/card_margin_bottom"
         android:layout_marginLeft="@dimen/horizontal_card_margin"
         android:layout_marginRight="@dimen/horizontal_card_margin"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="2dp"
-        card_view:cardCornerRadius="2dp">
+        android:layout_marginTop="@dimen/card_margin_top"
+        card_view:cardCornerRadius="@dimen/card_radius">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,8 +30,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    android:scaleType="fitXY"
-                     />
+                    android:scaleType="fitXY" />
 
                 <ProgressBar
                     android:id="@+id/loadGifProgress"
@@ -39,7 +38,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@id/gif"
-                    android:layout_marginBottom="-5dp"
+                    android:layout_marginBottom="@dimen/gif_load_progress_margin_bottom"
                     android:indeterminate="true" />
             </RelativeLayout>
 
@@ -48,24 +47,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginEnd="@dimen/was_trended_margin_end"
+                android:layout_marginTop="@dimen/was_trended_margin_top"
                 android:gravity="end"
-                android:textColor="#303030"
-                android:textSize="12sp"
-                android:textStyle="italic"
-                android:text="@string/was_trended"/>
+                android:text="@string/was_trended"
+                android:textColor="@color/fontColor"
+                android:textSize="@dimen/was_trended_text_size"
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/gifSlug"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginBottom="@dimen/slug_margin_bottom"
+                android:layout_marginLeft="@dimen/slug_horizontal_margin"
+                android:layout_marginRight="@dimen/slug_horizontal_margin"
                 android:textAlignment="center"
-                android:textColor="#303030"
-                android:textSize="18sp" />
+                android:textColor="@color/fontColor"
+                android:textSize="@dimen/slug_font_size" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

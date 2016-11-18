@@ -13,12 +13,12 @@ import rx.Observable;
  */
 
 public class GifPresenter {
-    private ApiCall mApiCall;
+    private ApiCallback mApiCallback;
     private List<GifPresentationModel> mLoadedGif = new ArrayList<>();
     private boolean mIsBusy = false;
 
-    public GifPresenter(ApiCall apiCall) {
-        mApiCall = apiCall;
+    public GifPresenter(ApiCallback apiCallback) {
+        mApiCallback = apiCallback;
     }
 
     public void loadNewGif(GifView view, boolean loadMore) {
@@ -27,7 +27,7 @@ public class GifPresenter {
                 return;
             }
             mIsBusy = true;
-            mApiCall.getObservableRequest()
+            mApiCallback.getObservableRequest()
                     .subscribe(response -> onNext(view, response),
                             throwable -> onError(view, throwable, loadMore)
             );
@@ -41,9 +41,9 @@ public class GifPresenter {
 
     private void onNext(GifView view, List<GifPresentationModel> gifList) {
         view.setData(gifList);
-        mLoadedGif.addAll(gifList);
         view.showContent();
-        mApiCall.incrementOffset(gifList.size());
+        mLoadedGif.addAll(gifList);
+        mApiCallback.incrementOffset(gifList.size());
         mIsBusy = false;
     }
 
@@ -62,7 +62,7 @@ public class GifPresenter {
         return false;
     }
 
-    public interface ApiCall {
+    public interface ApiCallback {
         Observable<List<GifPresentationModel>> getObservableRequest();
         void incrementOffset(int increment);
     }

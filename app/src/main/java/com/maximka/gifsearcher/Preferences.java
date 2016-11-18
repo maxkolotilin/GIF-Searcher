@@ -7,7 +7,9 @@ import proxypref.annotation.DefaultString;
  */
 
 public interface Preferences {
-    @DefaultString("r")
+    String DEFAULT_RATING = "r";
+
+    @DefaultString(DEFAULT_RATING)
     String getRating();
     void setRating(String rating);
 }

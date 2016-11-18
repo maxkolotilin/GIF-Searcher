@@ -17,11 +17,13 @@ public class GiphyResponse {
         Date trending_datetime;
 
         class RenditionsList {
-            GifRendition downsized;
-            GifRendition downsized_still;
+            GifRendition downsized_medium;
+            GifRendition original_still;
 
             class GifRendition {
                 String url;
+                int height;
+                int width;
             }
         }
     }

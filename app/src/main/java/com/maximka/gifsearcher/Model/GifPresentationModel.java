@@ -13,12 +13,16 @@ public class GifPresentationModel {
     private String mUrl;
     private String mUrlStill;
     private boolean mWasTrended;
+    private int mWidth;
+    private int mHeight;
 
     public GifPresentationModel(GiphyResponse.Gif gif) {
         mSlug = extractSlug(gif.slug, gif.id);
         mWasTrended = setWasTrended(gif.trending_datetime);
-        mUrl = gif.images.downsized.url;
-        mUrlStill = gif.images.downsized_still.url;
+        mUrl = gif.images.downsized_medium.url;
+        mUrlStill = gif.images.original_still.url;
+        mWidth = gif.images.downsized_medium.width;
+        mHeight = gif.images.downsized_medium.height;
     }
 
     public String getSlug() {
@@ -35,6 +39,18 @@ public class GifPresentationModel {
 
     public boolean isWasTrended() {
         return mWasTrended;
+    }
+
+    public int getWidth() {
+        return mWidth;
+    }
+
+    public int getHeight() {
+        return mHeight;
+    }
+
+    public double getAspectRatio() {
+        return (double) mWidth / mHeight;
     }
 
     private String extractSlug(String rawSlug, String id) {
